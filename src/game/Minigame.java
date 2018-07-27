@@ -1,10 +1,3 @@
-/**
- * @author Thu Vo
- * This project is used to improve and enhance 
- * your math instinct. Training you to have the
- * quick response with the basic addition.
- */
-
 package game;
 
 import java.awt.Dimension;
@@ -20,6 +13,12 @@ import javax.swing.Timer;
 
 import javazoom.jl.player.Player;
 
+/**
+ * 	This project is used to improve and enhance 
+ *	your math instinct. Training you to have the
+ *	quick response with the basic addition.
+ * @author ThuVo
+ */
 public class Minigame extends javax.swing.JFrame implements ActionListener {
     MP3 mp3 = new MP3(this.getClass().getClass().getResourceAsStream("/music/ThePinkPanther.mp3"));
     MP3 mp3t = new MP3(this.getClass().getClass().getResourceAsStream("/music/true.mp3"));
@@ -29,7 +28,7 @@ public class Minigame extends javax.swing.JFrame implements ActionListener {
     // The score
     int s = 0;
 
-    // create random number
+    // The range of the numbers
     int max = 9;
     int min = 1;
     int range = (max - min) + 1;
@@ -47,11 +46,11 @@ public class Minigame extends javax.swing.JFrame implements ActionListener {
     int customizedTime;
 
     // Sound
-
     public void game() {
-
+    	// Time limit equals 10 seconds
         customizedTime = 100;
-
+        
+        // Applied random method in Math class
         int random1 = (int) ((Math.random() * range) + min);
         int random2 = (int) ((Math.random() * range) + min);
         int rr = (int) ((Math.random() * range2) + min2);
@@ -73,9 +72,11 @@ public class Minigame extends javax.swing.JFrame implements ActionListener {
             break;
         }
         text.setText(" " + random1 + "+" + random2 + "=" + result);
-
+        
+        // If the answer is right, i equals 1
         if (result == result2) {
             i = 1;
+        // If the answer is wrong, i equals 2
         } else if (result != result2) {
             i = 2;
         }
@@ -88,6 +89,10 @@ public class Minigame extends javax.swing.JFrame implements ActionListener {
         time.restart();
     }
 
+    /**
+     * The method indicates when the time has reached
+     * its limit.
+     */
     public void actionPerformed(ActionEvent e) {
 
         time = new Timer(50, this);
@@ -104,12 +109,16 @@ public class Minigame extends javax.swing.JFrame implements ActionListener {
         }
     }
 
+    /**
+     * The introduction of the game
+     */
     public Minigame() {
         initComponents();
         mp3.play();
         setLocation(100, 100);
         setSize(500, 500);
         setTitle("Magical plus sign");
+//        setTitle("@2018 Thu Vo");
         bttrue.setVisible(false);
         btfalse.setVisible(false);
         text.setVisible(true);
@@ -157,10 +166,11 @@ public class Minigame extends javax.swing.JFrame implements ActionListener {
         }
     }
 
+    /**
+     * The sounds every time we replay the game
+     */
     public void reset() {
-
         game();
-
         mp3 = new MP3(this.getClass().getClass().getResourceAsStream("/music/ThePinkPanther.mp3"));
         mp3t = new MP3(this.getClass().getClass().getResourceAsStream("/music/true.mp3"));
         mp3f = new MP3(this.getClass().getClass().getResourceAsStream("/music/false.mp3"));
@@ -179,6 +189,8 @@ public class Minigame extends javax.swing.JFrame implements ActionListener {
                 super.paintComponent(g);
             }
         };
+        
+        //Buttons initializations.
         play = new javax.swing.JButton();
         bttrue = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -232,7 +244,7 @@ public class Minigame extends javax.swing.JFrame implements ActionListener {
         getContentPane().add(bttrue);
         bttrue.setBounds(40, 374, 130, 70);
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); 
         jLabel1.setForeground(new java.awt.Color(255, 255, 0));
         jLabel1.setText("Magical plus sign");
         getContentPane().add(jLabel1);
@@ -312,7 +324,10 @@ public class Minigame extends javax.swing.JFrame implements ActionListener {
         pack();
     }
 
-    // event_playActionPerformed
+    /**
+     * The method indicates the performance of the 'play' button
+     * @param evt
+     */
     private void playActionPerformed(java.awt.event.ActionEvent evt) {
         mp3.stop();
         pb.setVisible(true);
@@ -338,6 +353,10 @@ public class Minigame extends javax.swing.JFrame implements ActionListener {
         time.start();
     }
 
+    /**
+     * This method indicates the action of the correct/false answers
+     * @param evt
+     */
     private void bttrueActionPerformed(java.awt.event.ActionEvent evt) {
         // if correct
         if (i == 1) {
@@ -372,6 +391,7 @@ public class Minigame extends javax.swing.JFrame implements ActionListener {
 
     }
 
+    //The performance of the false button
     private void btfalseActionPerformed(java.awt.event.ActionEvent evt) {
         if (i == 2) {
             customizedTime = 100;
@@ -402,6 +422,7 @@ public class Minigame extends javax.swing.JFrame implements ActionListener {
         }
     }
 
+    //The performance of the exit button
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {
         mp3e.play();
         choose = JOptionPane.showConfirmDialog(null, "Do you want to exit this game ?", "", JOptionPane.YES_NO_OPTION);
@@ -413,6 +434,7 @@ public class Minigame extends javax.swing.JFrame implements ActionListener {
         }
     }
 
+    // The performance of the 'again' button
     private void btagainActionPerformed(java.awt.event.ActionEvent evt) {
         s = 0;
         score.setText("Score: " + s);
@@ -433,32 +455,32 @@ public class Minigame extends javax.swing.JFrame implements ActionListener {
         }
     }
 
-    // event_bttrueMousePressed
+    // When 'true' button is pressed
     private void bttrueMousePressed(java.awt.event.MouseEvent evt) {
         bttrue.setText("Correct!!");
     }
 
-    // event_bttrueMouseReleased
+    // When 'true' button is released
     private void bttrueMouseReleased(java.awt.event.MouseEvent evt) {
         bttrue.setText("Correct!!");
     }
 
-    // event_btfalseMousePressed
+    // When 'false' button is pressed
     private void btfalseMousePressed(java.awt.event.MouseEvent evt) {
         btfalse.setText("False");
     }
 
-    // event_btfalseMouseReleased
+    // When 'false' button is released
     private void btfalseMouseReleased(java.awt.event.MouseEvent evt) {
         btfalse.setText("False");
     }
 
-    // event_exitMouseMoved
+    // When 'exit' button is pressed
     private void exitMouseMoved(java.awt.event.MouseEvent evt) {
         exit.setIcon(new ImageIcon(getClass().getResource("/pictures/exit2.png")));
     }
 
-    // event_exitMouseReleased
+    // When 'exit' button is realeased
     private void exitMouseReleased(java.awt.event.MouseEvent evt) {
         exit.setIcon(new ImageIcon(getClass().getResource("/pictures/exit.png")));
     }
